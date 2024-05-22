@@ -6,7 +6,7 @@ const {readFileSync} = require('fs');
 const { dirname } = require('path');
 var argv = require('minimist')(process.argv.slice(2));
 const { throwError, config, log, getVariable, scope, setVariable } = require("./mem");
-const packages = JSON.parse(readFileSync("dist\\lib\\packages.json" || dirname(process.execPath)+'\\lib\\packages.json', "utf8"));
+const packages = JSON.parse(readFileSync(dirname(process.execPath)+'\\lib\\packages.json', "utf8"));
 
 const VERSION = "0.1.4";
 
@@ -166,7 +166,7 @@ function main(ast) {
                     }
                     let filePath = statement["statement"][1].value;
                     if (Object.keys(packages[""]).includes(filePath)){
-                        filePath = ("dist\\lib\\" || dirname(process.execPath)+'\\lib\\') +packages[""][filePath].path;
+                        filePath = (dirname(process.execPath)+'\\lib\\') +packages[""][filePath].path;
                     }
                     let fileContent;
                     try {
